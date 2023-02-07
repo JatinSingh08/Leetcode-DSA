@@ -3,15 +3,19 @@ public:
     int totalFruit(vector<int>& fruits) {
         unordered_map<int,int> counter;
         int i=0,j=0;
-        for( ;j<fruits.size();j++) {
+        int res = INT_MIN;
+        while(j<fruits.size()) {
             counter[fruits[j]]++;
-            
+
             if(counter.size() > 2) {
-                if(--counter[fruits[i]] ==0) counter.erase(fruits[i]);
+                counter[fruits[i]]--;
+                if(counter[fruits[i]]==0) counter.erase(fruits[i]);
                 
                 i++;
             }
+            res = max(res,j-i+1);
+            j++;
         }
-        return j-i;
+        return res;
     }
 };
